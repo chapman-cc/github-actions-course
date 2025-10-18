@@ -1,0 +1,12 @@
+name: 04 - Using Actions
+on: 
+  push:
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v5.0.0
+      - name: Printing folders
+        run: ls -la
+  
