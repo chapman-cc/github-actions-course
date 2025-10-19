@@ -14,6 +14,7 @@ jobs:
                   echo "Actor: ${{github.actor}}"
                   echo "Workflow: ${{github.workflow}}"
                   echo "Run ID: ${{github.run_id}}"
-                  echo "Run number: ${{github.run_number}}"
+              #   echo "Run number: ${{github.run_number}}"
             - name: Retrieve variable
-              run: echo "${{vars.MY_VAR}}"
+              run: |
+                  echo "Variable value: ${{vars.MY_VAR}}"
