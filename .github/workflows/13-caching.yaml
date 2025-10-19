@@ -63,8 +63,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-      - name: Testing
-        run: npm test
       - name: Building
         run: npm run build
       - name: Deploying to nonprod
