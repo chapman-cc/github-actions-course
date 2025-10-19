@@ -1,4 +1,5 @@
 name: 06 - Contexts
+run-name: 06 - Contexts | DEBUG - ${{inputs.debug}}
 on:
   push:
   workflow_dispatch:
@@ -8,7 +9,8 @@ on:
         type: boolean
         default: false
 env:
-  run-name: 06 - Contexts | DEBUG - ${{inputs.debug}}
+  MY_WORKFLOW_VAR: workflow
+  MY_OVERWRITTEN_VAR: workflow
 
 jobs:
   echo-data:
@@ -26,3 +28,5 @@ jobs:
       - name: Retrieve variable
         run: |
           echo "Variable value: ${{vars.MY_VAR}}"
+          echo "MY_JOB_VAR: ${{vars.MY_JOB_VAR}}"
+          echo "MY_OVERWRITTEN_VAR: ${{vars.MY_OVERWRITTEN_VAR}}"
