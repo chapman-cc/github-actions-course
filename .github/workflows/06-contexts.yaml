@@ -1,24 +1,28 @@
 name: 06 - Contexts
 on:
-    push:
-    workflow_dispatch:
+  push:
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: should debug?
+        type: boolean
+        default: false
 env:
-    run-name: My custom workflow run name - ${{ runner.os }}
-
+  run-name: 06 - Contexts | DEBUG - ${{inputs.debug}}
 
 jobs:
-    echo-data:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Display information
-              run: |
-                  echo "Event name: ${{github.event_name}}"
-                  echo "Ref: ${{github.ref_name}}"
-                  echo "SHA: ${{github.sha}}"
-                  echo "Actor: ${{github.actor}}"
-                  echo "Workflow: ${{github.workflow}}"
-                  echo "Run ID: ${{github.run_id}}"
-                  echo "Run number: ${{github.run_number}}"
-            - name: Retrieve variable
-              run: |
-                  echo "Variable value: ${{vars.MY_VAR}}"
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display information
+        run: |
+          echo "Event name: ${{github.event_name}}"
+          echo "Ref: ${{github.ref_name}}"
+          echo "SHA: ${{github.sha}}"
+          echo "Actor: ${{github.actor}}"
+          echo "Workflow: ${{github.workflow}}"
+          echo "Run ID: ${{github.run_id}}"
+          echo "Run number: ${{github.run_number}}"
+      - name: Retrieve variable
+        run: |
+          echo "Variable value: ${{vars.MY_VAR}}"
