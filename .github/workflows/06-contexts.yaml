@@ -15,6 +15,9 @@ env:
 jobs:
   echo-data:
     runs-on: ubuntu-latest
+    env:
+      MY_WORKFLOW_VAR: job
+      MY_OVERWRITTEN_VAR: job
     steps:
       - name: Display information
         run: |
@@ -28,5 +31,13 @@ jobs:
       - name: Retrieve variable
         run: |
           echo "Variable value: ${{vars.MY_VAR}}"
-          echo "MY_JOB_VAR: ${{vars.MY_JOB_VAR}}"
-          echo "MY_OVERWRITTEN_VAR: ${{vars.MY_OVERWRITTEN_VAR}}"
+      - name: Print ENV Variable
+        env:
+          MY_OVERWRITTEN_VAR: step
+        run: |
+          echo "Workflow env: ${{vars.MY_WORKFLOW_VAR}}"
+          echo "Overwritten env: ${{vars.MY_OVERWRITTEN_VAR}}"
+      - name: Print more ENV Variables
+        run: |
+          echo "Workflow env: ${{vars.MY_WORKFLOW_VAR}}"
+          echo "Overwritten env: ${{vars.MY_OVERWRITTEN_VAR}}"
