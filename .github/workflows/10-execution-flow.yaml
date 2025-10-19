@@ -19,7 +19,7 @@ jobs:
         run: "Running tests..."
       - name: Failing tests
         run: exit 1
-        if: inputs.pass-unit-tests == false
+        if: inputs.pass-unit-tests
   deploy-nonprod:
     runs-on: ubuntu-latest
     needs:
