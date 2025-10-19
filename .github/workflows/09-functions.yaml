@@ -1,7 +1,7 @@
 name: 09 - Using Functions
 on:
   pull_request:
-    types: [opened, synchronize, labeled]
+    types: [locked]
   workflow_dispatch:
 
 jobs:
