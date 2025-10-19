@@ -1,7 +1,7 @@
 name: 06 - Contexts
 run-name: 06 - Contexts ${{inputs.debug && '| DEBUG'}}
 on:
-  push:
+  # push:
   workflow_dispatch:
     inputs:
       debug:
@@ -16,7 +16,6 @@ jobs:
   echo-data:
     runs-on: ubuntu-latest
     env:
-      MY_WORKFLOW_VAR: job
       MY_OVERWRITTEN_VAR: job
     steps:
       - name: Display information
