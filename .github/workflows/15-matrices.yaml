@@ -4,13 +4,28 @@ on: workflow_dispatch
 jobs:
     backwards-compatibility:
         strategy:
+            fail-fast: false
             matrix:
                 node-version: [18.x, 20.x, 21.x]
                 os: [ubuntu-latest, windows-latest]
+                include:
+                    - node-version: 16.x
+                      os: ubuntu-latest
+                    - node-version: 21.x
+                      os: ubuntu-latest
+                      tag: experimental
+
         runs-on: ${{matrix.os}}
         steps:
             - uses: actions/setup-node@v6
               with:
                   node-version: ${{matrix.node-version}}
+            - name: Fail if experimental
+              if: matrix.tag == 'experimental'
+              run: exit 1
             - name: Perform some tests
-              run: echo "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
+              run: |
+                  sleep 10
+                  echo "Running tests on OS ${{matrix.os}} and NodeJS ${{matrix.node-version}}"
+            - name: Upload test results
+              run: echo "Uploading test results"
