@@ -1,33 +1,39 @@
 name: 09 - Using Functions
 on:
-    pull_request:
-    workflow_dispatch:
+  pull_request:
+    types: [locked]
+  workflow_dispatch:
+
 jobs:
-    echo1:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Print PR title
-              run: echo ${{github.event.pull_request.title}}
-            - name: Print PR labels
-              run: echo ${{fromJson(github.event.pull_request.labels)}}
-            - name: Bug step
-              run: echo "I am a bug fix"
-              if: contains(github.event.pull_request.title, 'fix')
-            - name: Sleep for 20 seconds
-              run: sleep 20
-            - name: Failing Step
-              run: exit 1
-            - name: I'll be skipped
-              run: echo "I will print if previous steps succeed."
-            - name: I will execute
-              run: echo "I will print if any previous step fails."
-              if: always()
-            - name: I will execute
-              run: echo "I will always print, except when the workflow is cancelled."
-              if: success()
-            - name: I will execute when cancelled
-              run: echo "I will run if workflow is cancelled"
-              if: cancelled()
-            - name: I will execute when failure
-              run: echo "I will run if workflow is failure"
-              if: failure()
+  echo1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print PR title
+        run: echo ${{github.event.pull_request.title}}
+      - name: Print PR labels
+        run: |
+          cat << EOF
+          echo ${{toJson(github.event.pull_request.labels)}}
+          EOF
+        if: github.event.pull_request.labels
+      - name: Bug step
+        run: echo "I am a bug fix"
+        if: contains(github.event.pull_request.title, 'fix')
+      - name: Sleep for 20 seconds
+        run: sleep 20
+      - name: Failing Step
+        run: exit 1
+      - name: I'll be skipped
+        run: echo "I will print if previous steps succeed."
+      - name: I will execute
+        run: echo "I will print if any previous step fails."
+        if: always()
+      - name: I will execute
+        run: echo "I will always print, except when the workflow is cancelled."
+        if: success()
+      - name: I will execute when cancelled
+        run: echo "I will run if workflow is cancelled"
+        if: cancelled()
+      - name: I will execute when failure
+        run: echo "I will run if workflow is failure"
+        if: failure()
