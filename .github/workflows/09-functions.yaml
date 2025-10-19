@@ -12,6 +12,7 @@ jobs:
         run: echo ${{github.event.pull_request.title}}
       - name: Print PR labels
         run: echo ${{fromJson(github.event.pull_request.labels)}}
+        if: github.event.pull_request.labels
       - name: Bug step
         run: echo "I am a bug fix"
         if: contains(github.event.pull_request.title, 'fix')
