@@ -11,7 +11,7 @@ jobs:
             - name: I'll be skipped
               run: echo "I will print if previous steps succeed."
             - name: I will execute
-              run: "I will print if any previous step fails."
+              run: echo "I will print if any previous step fails."
               if: always()
             - name: I will execute
               run: echo "I will always print, except when the workflow is cancelled."
@@ -21,4 +21,3 @@ jobs:
               if: cancelled()
             - name: Sleep for 20 seconds
               run: sleep 20
-              
