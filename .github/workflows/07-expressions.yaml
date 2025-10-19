@@ -1,5 +1,5 @@
 name: 07 - Using Expressions
-# run-name: 07 - Using Expressions | DEBUG - ${{inputs.debug && "TRUE" || "FALSE"}}
+run-name: 07 - Using Expressions | DEBUG - ${{inputs.debug && 'TRUE' || 'FALSE'}}
 
 on:
     push:
@@ -21,7 +21,7 @@ jobs:
                   echo "Commit SHA: ${{github.sha}}"
                   echo "Runner OS: ${{runner.os}}"
             - name: "[debug] Print when triggered from main"
-              if: ${{inputs.debug }} && ${{github.ref}} === "main"
+              if: ${{inputs.debug && github.ref == 'refs/head/main'}}
               run: echo "I was triggered from main"
             - name: Greeting
               run: echo "Hello world"
