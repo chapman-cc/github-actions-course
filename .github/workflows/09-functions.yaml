@@ -19,5 +19,8 @@ jobs:
             - name: I will execute when cancelled
               run: echo "I will run if workflow is cancelled"
               if: cancelled()
+            - name: I will execute when failur
+              run: echo "I will run if workflow is failure"
+              if: failure()
             - name: Sleep for 20 seconds
               run: sleep 20
