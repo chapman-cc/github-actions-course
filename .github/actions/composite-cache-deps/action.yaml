@@ -33,9 +33,4 @@ runs:
       shell: sh
       working-directory: ${{inputs.working-dir}}
       if: steps.cache.outputs.cache-hit != 'true'
-      run: |
-        if [ ${{inputs.target-env == 'dev'}} ]; then
-          npm ci
-        else
-          npm ci --omit=dev
-        fi
+      run: ${{inputs.target-env == 'dev' && 'npm ci' || 'npm ci --omit=dev'}}
