@@ -15,15 +15,16 @@ runs:
       uses: actions/setup-node@v6
       with:
         node-version: ${{inputs.node-version}}
-
+    - name: Calculate cache key
+      id: cache-key
+      shell: sh
+      run: echo "CACHE_KEY=${{hashFiles(inputs.working-dir+"/package-lock.json")}}"
     - name: Cache dependencies
       id: cache
       uses: actions/cache@v4
-      env:
-        PACKAGE_LOCK_JSON_PATH: "${{inputs.working-dir}}/package-lock.json"
       with:
         key: ${{steps.cache-key.outputs.CACHE_KEY}}
-        path: node-modules-${{ hashFiles(env.PACKAGE_LOCK_JSON_PATH) }}
+        path: ${{inputs.working-dir}}/package-lock.json
     - name: Install dependencies
       shell: sh
       if: steps.cache.outputs.cache-hit != 'true'
