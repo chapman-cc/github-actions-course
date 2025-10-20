@@ -1,5 +1,5 @@
 name: 17 - 1 - Custom Actions - Composite
-run-name: 17 - 1 - Custom Actions - Composite | env - ${{ inputs.target-env }}.
+run-name: 17 - 1 - Custom Actions - Composite | env - ${{ inputs.target-env }}
 env:
   working-directory: 17-custom-actions/react-app
 on:
@@ -25,7 +25,6 @@ jobs:
         with:
           working-dir: ${{ env.working-directory }}
       - name: Test
-        run:  npm run test
+        run: npm run test
       - name: Build
         run: npm run build
-
