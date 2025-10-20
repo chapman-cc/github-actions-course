@@ -10,7 +10,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup NodeJS version ${{input.node-version}}
+    - name: Setup NodeJS version ${{inputs.node-version}}
       uses: actions/setup-node@v6
       with:
         node-version: ${{inputs.node-version}}
@@ -19,7 +19,7 @@ runs:
       id: cache
       uses: actions/cache@v4
       env:
-        PACKAGE_LOCK_JSON_PATH: "${{input.working-dir}}/package-lock.json"
+        PACKAGE_LOCK_JSON_PATH: "${{inputs.working-dir}}/package-lock.json"
       with:
         key: ${{steps.cache-key.outputs.CACHE_KEY}}
         path: node-modules-${{ hashFiles(env.PACKAGE_LOCK_JSON_PATH) }}
@@ -27,4 +27,4 @@ runs:
       shell: sh
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
-      working-directory: ${{input.working-dir}}
+      working-directory: ${{inputs.working-dir}}
