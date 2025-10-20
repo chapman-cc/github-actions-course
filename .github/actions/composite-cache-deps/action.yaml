@@ -8,6 +8,9 @@ inputs:
   working-dir:
     description: The working directory of the application
     default: .
+  target-env:
+    description: '"dev" or "prod". Controls whether dev dependencies are installed'
+    default: dev
 runs:
   using: composite
   steps:
@@ -19,7 +22,7 @@ runs:
       id: cache-key
       shell: sh
       run: |
-        echo "CACHE_KEY=${{ hashFiles(format('{0}/package-lock.json', inputs.working-dir)) }}" >> "$GITHUB_OUTPUT"
+        echo "CACHE_KEY=${{inputs.target-env}}-${{ hashFiles(format('{0}/package-lock.json', inputs.working-dir)) }}" >> "$GITHUB_OUTPUT"
     - name: Cache dependencies
       id: cache
       uses: actions/cache@v4
@@ -28,6 +31,11 @@ runs:
         path: ${{inputs.working-dir}}/package-lock.json
     - name: Install dependencies
       shell: sh
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: npm ci
       working-directory: ${{inputs.working-dir}}
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        if [ ${{inputs.target-env == 'dev'}} ]; then
+          npm ci
+        else
+          npm ci --omit=dev
+        fi
