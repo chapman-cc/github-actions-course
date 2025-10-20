@@ -20,7 +20,7 @@ runs:
       shell: sh
       run: |
         LOCK_FILE_PATH="${{inputs.working-dir}}/package-lock.json"
-        echo "CACHE_KEY=${{hashFiles(env.LOCK_FILE_PATH)}}"
+        echo "CACHE_KEY=${{hashFiles($LOCK_FILE_PATH)}}" >> "$GITHUB_OUTPUT"
     - name: Cache dependencies
       id: cache
       uses: actions/cache@v4
