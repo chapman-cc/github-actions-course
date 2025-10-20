@@ -3,7 +3,6 @@
   "yaml.schemas": {
     "file:///Users/chapmancheng/.vscode/extensions/continue.continue-1.2.9-darwin-arm64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
-    ],
-    "https://www.schemastore.org/github-action.json": "file:///Users/chapmancheng/test-repos/github-actions-course/.github/actions/composite-cache-deps/action.yaml"
+    ]
   }
 }
