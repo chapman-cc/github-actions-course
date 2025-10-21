@@ -18,16 +18,11 @@ runs:
       uses: actions/setup-node@v6
       with:
         node-version: ${{inputs.node-version}}
-    - name: Calculate cache key
-      id: cache-key
-      shell: sh
-      run: |
-        echo "CACHE_KEY=${{inputs.target-env}}-${{ hashFiles(format('{0}/package-lock.json', inputs.working-dir)) }}" >> "$GITHUB_OUTPUT"
     - name: Cache dependencies
       id: cache
       uses: actions/cache@v4
       with:
-        key: ${{steps.cache-key.outputs.CACHE_KEY}}
+        key: ${{inputs.target-env}}-${{ hashFiles(format('{0}/package-lock.json', inputs.working-dir)) }}s
         path: ${{inputs.working-dir}}/package-lock.json
     - name: Install dependencies
       shell: sh
