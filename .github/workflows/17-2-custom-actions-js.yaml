@@ -11,6 +11,6 @@ jobs:
         with:
           base-branch: main
           target-branch: main
-          working-dir: 17-custom-actions/react-app
+          working-directory: 17-custom-actions/react-app
           debug: true
           gh-token: ${{ github.token }}
