@@ -17,8 +17,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     outputs:
-      build-status: ${{ steps.build.outputs }}
-      url: ${{ steps.deploy.outputs }}
+      build-status: ${{ steps.build.outputs.build_status }}
+      url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v5
       - name: Build
