@@ -1,0 +1,33 @@
+name: 18 - 1 - Reusable Wrokflows - Reusable Definition
+on:
+  workflow_call:
+    inputs:
+      target-directory:
+        required: true
+        type: string
+    outputs:
+      build-status:
+        description: The status of the build process
+        value: aaa
+      url:
+        description: The url of the deployed version
+        value: bbb
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    outputs:
+      build-status: ${{ steps.build.outputs }}
+      url: ${{ steps.deploy.outputs }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build
+        id: build
+        run: |
+          echo "Building using directory ${{ inputs.target-directory }}"
+          echo "build-status=success" >> $GITHUB_OUTPUT
+      - name: Deploy
+        id: deploy
+        run: |
+          echo "Deploying using artifacts"
+          echo "url=https://google.com" >> $GITHUB_OUTPUT
