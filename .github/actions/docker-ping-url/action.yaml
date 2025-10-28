@@ -7,11 +7,14 @@ inputs:
 
   max_trials:
     description: Maximum number of trains util action fails
-    default: '10'
-  
-  delay: 
+    default: "10"
+
+  delay:
     description: Delay in seconds between trials
-    default: '5'  
+    default: "5"
+outputs:
+  url-reachable:
+    description: Whether the URL is reachable
 
 runs:
   using: docker

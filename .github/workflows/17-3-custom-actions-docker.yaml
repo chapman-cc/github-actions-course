@@ -20,6 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/docker-ping-url
+        id: docker-ping-url
         with:
           url: ${{ github.event.inputs.url }}
           max_trials: ${{ github.event.inputs.max_trials }}
+      - name: Print output from ping url
+        run: |
+          echo "URL reachable: ${{ steps.docker-ping-url.outputs.url-reachable }}"
