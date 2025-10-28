@@ -5,10 +5,10 @@ on:
       url:
         type: choice
         options:
-          - https://wwww.google.com
+          - https://www.google.com
           - https://unreachable-url.com
         description: URL
-        default: https://wwww.google.com
+        default: https://www.google.com
       max_trials:
         description: Maximum trials until action fails
         type: number
