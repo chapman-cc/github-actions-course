@@ -7,14 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: print
-        run: ls -lr
-        
-      - name: print pwd
-        run: pwd
-
       - name: Ping URL
-        uses: ./github/actions/docker-ping-url
+        uses: actions/docker-ping-url
         with:
           url: https://gooooooooogle.com
           max_trials: 20
