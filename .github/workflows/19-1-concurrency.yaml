@@ -1,7 +1,7 @@
 name: 19 - 1 - Managing Concurrency
 on: workflow_dispatch
 concurrency:
-  group: <retrieve the workflow name here>-<retrieve the git ref here>
+  group: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   ping:
     runs-on: ubuntu-latest
