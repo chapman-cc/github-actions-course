@@ -9,6 +9,10 @@ jobs:
       - uses: actions/checkout@v5
       - name: print
         run: ls -lr
+        
+      - name: print pwd
+        run: pwd
+
       - name: Ping URL
         uses: ./github/actions/docker-ping-url
         with:
