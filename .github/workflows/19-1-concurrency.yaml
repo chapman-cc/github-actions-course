@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+      - name: print
+        run: ls -lr
       - name: Ping URL
         uses: ./github/actions/docker-ping-url
         with:
