@@ -21,8 +21,6 @@ jobs:
       url: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/checkout@v5
-      - name: print
-        run: ls -lr
       - name: Build
         id: build
         run: |
