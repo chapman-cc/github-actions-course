@@ -7,9 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Ping URL
-        uses: ./github/actions/docker-ping-url
+      - uses: ./.github/actions/docker-ping-url
+        id: docker-ping-url
         with:
-          url: https://gooooooooogle.com
-          max_trials: 20
-          deplay: 5
+          url: ${{ github.event.inputs.url }}
+          max_trials: ${{ github.event.inputs.max_trials }}
+      - name: Print output from ping url
+        run: |
+          echo "URL reachable: ${{ steps.docker-ping-url.outputs.url-reachable }}"
